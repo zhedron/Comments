@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь и комментарий</title>
+</head>
+<body>
+<p th:text="${user.getName()}">VALUE</p>
+<p th:text="${user.getSurname()}">VALUE</p>
+
+<br/>
+
+<form method="POST" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+    <label for="text">Комментарий</label>
+    <input type="text" th:field="*{text}" id="text"/>
+    <br/>
+    <input type="submit" value="OK"/>
+</form>
+
+<p th:text="${user.getName()} + ': ' + ${user.getText()}">VALUE</p>
+</body>
+</html>
