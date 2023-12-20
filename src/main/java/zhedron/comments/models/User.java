@@ -2,6 +2,8 @@ package zhedron.comments.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table (name = "users")
 public class User {
@@ -18,6 +20,9 @@ public class User {
 
     @Column
     private String text;
+
+    @Column (length = 1000)
+    private String comments;
 
     public User () {}
 
@@ -51,5 +56,13 @@ public class User {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

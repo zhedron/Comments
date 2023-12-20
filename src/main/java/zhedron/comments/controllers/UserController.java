@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import zhedron.comments.models.User;
 import zhedron.comments.services.UserService;
 
-import java.util.List;
-
 @Controller
 @RequestMapping ("/users")
 public class UserController {
@@ -45,6 +43,20 @@ public class UserController {
     @PostMapping("/{id}")
     public String addComment (@PathVariable int id, @ModelAttribute ("user") User user) {
         User users = service.findUser(id);
+
+        String currentComments = users.getComments();
+
+        String newComments = user.getText();
+
+        if (currentComments != null) {
+            currentComments += "\n" + users.getName() + ": " + newComments;
+        } else {
+            currentComments = newComments;
+        }
+
+        System.out.println("\n" + users.getName() + ": " + newComments);
+
+        users.setComments(currentComments);
         users.setText(user.getText());
         service.save(users);
         return "redirect:/users/{id}";
